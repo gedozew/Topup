@@ -7,40 +7,33 @@
 </head>
 <body>
 
-<div class="container">
-  <h2>💳 Top Up E-Wallet</h2>
+<div class="app">
 
-  <!-- STEP 1 -->
-  <div id="step1">
-    <p>Pilih E-Wallet:</p>
-    <button onclick="pilihWallet('DANA')">DANA</button>
-    <button onclick="pilihWallet('OVO')">OVO</button>
-    <button onclick="pilihWallet('GOPAY')">GOPAY</button>
+  <h1>Top Up E-Wallet</h1>
+
+  <!-- WALLET -->
+  <div class="wallet-list">
+    <div class="card" onclick="selectWallet('DANA')">DANA</div>
+    <div class="card" onclick="selectWallet('OVO')">OVO</div>
+    <div class="card" onclick="selectWallet('GOPAY')">GOPAY</div>
   </div>
 
-  <!-- STEP 2 -->
-  <div id="step2" class="hidden">
-    <p id="walletSelected"></p>
-    <input type="text" id="nomor" placeholder="Masukkan Nomor">
-    <button onclick="lanjutNomor()">Lanjut</button>
+  <!-- FORM -->
+  <div id="form" class="hidden">
+
+    <input type="text" id="nomor" placeholder="Masukkan nomor HP">
+
+    <div class="nominal">
+      <button onclick="selectNominal(10000)">10K</button>
+      <button onclick="selectNominal(20000)">20K</button>
+      <button onclick="selectNominal(50000)">50K</button>
+    </div>
+
+    <button class="pay" onclick="bayar()">Bayar</button>
+
   </div>
 
-  <!-- STEP 3 -->
-  <div id="step3" class="hidden">
-    <p>Pilih Nominal:</p>
-    <button onclick="pilihNominal(10000)">10.000</button>
-    <button onclick="pilihNominal(20000)">20.000</button>
-    <button onclick="pilihNominal(50000)">50.000</button>
-  </div>
-
-  <!-- STEP 4 -->
-  <div id="step4" class="hidden">
-    <p id="ringkasan"></p>
-    <button class="bayar" onclick="bayar()">Bayar</button>
-  </div>
-
-  <div id="loading" class="hidden">⏳ Memproses...</div>
-  <div id="status"></div>
+  <p id="status"></p>
 
 </div>
 
