@@ -1,44 +1,23 @@
 let wallet = "";
-let nomor = "";
 let nominal = 0;
 
-function pilihWallet(w) {
+function selectWallet(w) {
   wallet = w;
-  document.getElementById("step1").classList.add("hidden");
-  document.getElementById("step2").classList.remove("hidden");
-  document.getElementById("walletSelected").innerText =
-    "E-Wallet: " + w;
+  document.getElementById("form").classList.remove("hidden");
 }
 
-function lanjutNomor() {
-  nomor = document.getElementById("nomor").value;
-
-  if (!nomor) {
-    alert("Masukkan nomor!");
-    return;
-  }
-
-  document.getElementById("step2").classList.add("hidden");
-  document.getElementById("step3").classList.remove("hidden");
-}
-
-function pilihNominal(n) {
+function selectNominal(n) {
   nominal = n;
-
-  document.getElementById("step3").classList.add("hidden");
-  document.getElementById("step4").classList.remove("hidden");
-
-  document.getElementById("ringkasan").innerText =
-    wallet + " | " + nomor + " | Rp " + nominal;
 }
 
 function bayar() {
-  document.getElementById("loading").classList.remove("hidden");
+  let nomor = document.getElementById("nomor").value;
 
-  setTimeout(() => {
-    document.getElementById("loading").classList.add("hidden");
+  if (!wallet || !nomor || !nominal) {
+    alert("Lengkapi data!");
+    return;
+  }
 
-    document.getElementById("status").innerHTML =
-      "✅ Top up " + wallet + " ke " + nomor + " sebesar Rp " + nominal + " berhasil!";
-  }, 2000);
+  document.getElementById("status").innerHTML =
+    "✅ " + wallet + " → " + nomor + " <br> Rp " + nominal;
 }
