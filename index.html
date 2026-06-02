@@ -1,42 +1,84 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Top Up E-Wallet</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Top Up</title>
+  <style>
+    body {
+      background:#0f172a;
+      color:white;
+      text-align:center;
+      font-family:Arial;
+    }
+
+    .hidden { display:none; }
+
+    .card {
+      padding:15px;
+      margin:5px;
+      background:#1e293b;
+      display:inline-block;
+      cursor:pointer;
+      border-radius:10px;
+    }
+
+    input, button {
+      margin:10px;
+      padding:10px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="app">
+<h2>Pilih E-Wallet</h2>
 
-  <h1>Top Up E-Wallet</h1>
+<div class="card" onclick="selectWallet('DANA')">DANA</div>
+<div class="card" onclick="selectWallet('OVO')">OVO</div>
+<div class="card" onclick="selectWallet('GOPAY')">GOPAY</div>
 
-  <!-- WALLET -->
-  <div class="wallet-list">
-    <div class="card" onclick="selectWallet('DANA')">DANA</div>
-    <div class="card" onclick="selectWallet('OVO')">OVO</div>
-    <div class="card" onclick="selectWallet('GOPAY')">GOPAY</div>
-  </div>
+<div id="form" class="hidden">
+  <h3 id="walletText"></h3>
 
-  <!-- FORM -->
-  <div id="form" class="hidden">
+  <input type="text" id="nomor" placeholder="Masukkan nomor"><br>
 
-    <input type="text" id="nomor" placeholder="Masukkan nomor HP">
-
-    <div class="nominal">
-      <button onclick="selectNominal(10000)">10K</button>
-      <button onclick="selectNominal(20000)">20K</button>
-      <button onclick="selectNominal(50000)">50K</button>
-    </div>
-
-    <button class="pay" onclick="bayar()">Bayar</button>
-
-  </div>
-
-  <p id="status"></p>
-
+  <button onclick="lanjut()">Lanjut</button>
 </div>
 
-<script src="script.js"></script>
+<div id="nominalBox" class="hidden">
+  <h3>Pilih Nominal</h3>
+  <button onclick="bayar(10000)">10K</button>
+  <button onclick="bayar(20000)">20K</button>
+</div>
+
+<p id="hasil"></p>
+
+<script>
+let wallet = "";
+
+function selectWallet(w) {
+  wallet = w;
+
+  document.getElementById("form").classList.remove("hidden");
+  document.getElementById("walletText").innerText = "Wallet: " + w;
+}
+
+function lanjut() {
+  let nomor = document.getElementById("nomor").value;
+
+  if (!nomor) {
+    alert("Isi nomor dulu!");
+    return;
+  }
+
+  document.getElementById("nominalBox").classList.remove("hidden");
+}
+
+function bayar(nominal) {
+  let nomor = document.getElementById("nomor").value;
+
+  document.getElementById("hasil").innerHTML =
+    "✅ " + wallet + " → " + nomor + "<br>Rp " + nominal;
+}
+</script>
+
 </body>
 </html>
